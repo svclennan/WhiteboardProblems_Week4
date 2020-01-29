@@ -11,73 +11,95 @@ namespace WhiteboardProblems
     {
         static void Main(string[] args)
         {
-            Console.WriteLine( "IndexSum Testing" ); 
+            Console.WriteLine("IndexSum Testing");
             int[] input = new int[] { 5, 17, 77, 50 };
             int[] outputArr = IndexSums(input, 55);
             string outputString = PrintArray(outputArr);
             Console.WriteLine(outputString);
             Console.WriteLine();
 
-            Console.WriteLine("Palindrome Testing"); 
+            Console.WriteLine("Palindrome Testing");
             Console.WriteLine(Palindrome("nurses run"));
             Console.WriteLine();
 
-            Console.WriteLine("Reciprocal Testing"); 
+            Console.WriteLine("Reciprocal Testing");
             Console.WriteLine(ReverseReciprocal(17));
             Console.WriteLine();
 
             Console.WriteLine("Combination Lock Test");
-            Console.WriteLine(CombinationLock(3893,5296));
+            Console.WriteLine(CombinationLock(3893, 5296));
             Console.WriteLine();
 
-            Console.WriteLine("Incrementing Test"); 
-            int[] arr = new int[] { 6,2,8,10 };
+            Console.WriteLine("Incrementing Test");
+            int[] arr = new int[] { 6, 2, 8, 10 };
             Console.WriteLine(Incrementing(arr));
             Console.WriteLine();
 
-            Console.WriteLine("PositiveAndNegative Test"); 
+            Console.WriteLine("PositiveAndNegative Test");
             input = new int[] { 7, 9, -3, -32, 107, -1, 36, 95, -14, -99, 21 };
             outputArr = PositiveAndNegative(input);
             outputString = PrintArray(outputArr);
             Console.WriteLine(outputString);
             Console.WriteLine();
 
-            Console.WriteLine("MaxMin Test"); 
-            Console.WriteLine( MaxAndMin("3 9 0 1 4 8 10 2") );
+            Console.WriteLine("MaxMin Test");
+            Console.WriteLine(MaxAndMin("3 9 0 1 4 8 10 2"));
             Console.WriteLine();
+
 
             Console.WriteLine("HappyNumbers Test");
             Console.WriteLine(HappyNumbers(19));
             Console.WriteLine();
 
             Console.WriteLine("Valid Email Test");
-            //Console.WriteLine(validEmail("name@org.org"));//True
-            //Console.WriteLine(validEmail("na.me@net.net"));//True
-            //Console.WriteLine(validEmail("@org.org"));//False
-            //Console.WriteLine(validEmail("name@org"));//False
-            //Console.WriteLine(validEmail("name@.org"));//False
-            //Console.WriteLine(validEmail("name@org.com"));//True
-            //Console.WriteLine(validEmail("name@org.edu"));//True
-            //Console.WriteLine(validEmail("name@org.mil"));//True
-            //Console.WriteLine(validEmail("name@org.gov"));//True
-            Console.WriteLine(validEmailUsingEmailClass("name@org.org"));
-            Console.WriteLine(validEmailUsingEmailClass("na.me@net.net"));
-            Console.WriteLine(validEmailUsingEmailClass("@org.org"));
-            Console.WriteLine(validEmailUsingEmailClass("name@gov"));
-            Console.WriteLine(validEmailUsingEmailClass("name@.org"));
-            Console.WriteLine(validEmailUsingEmailClass("name@org.com"));
-            Console.WriteLine(validEmailUsingEmailClass("name@org.edu"));
-            Console.WriteLine(validEmailUsingEmailClass("name@org.mil"));
-            Console.WriteLine(validEmailUsingEmailClass("name@org.gov"));
+            Console.WriteLine(validEmail("name@org.org"));//True
+            Console.WriteLine(validEmail("na.me@net.net"));//True
+            Console.WriteLine(validEmail("@org.org"));//False
+            Console.WriteLine(validEmail("name@org"));//False
+            Console.WriteLine(validEmail("name@.org"));//False
+            Console.WriteLine(validEmail("name@org.com"));//True
+            Console.WriteLine(validEmail("name@org.edu"));//True
+            Console.WriteLine(validEmail("name@org.mil"));//True
+            Console.WriteLine(validEmail("name@org.gov"));//True
+            //Console.WriteLine(validEmailUsingEmailClass("name@org.org"));
+            //Console.WriteLine(validEmailUsingEmailClass("na.me@net.net"));
+            //Console.WriteLine(validEmailUsingEmailClass("@org.org"));
+            //Console.WriteLine(validEmailUsingEmailClass("name@gov"));
+            //Console.WriteLine(validEmailUsingEmailClass("name@.org"));
+            //Console.WriteLine(validEmailUsingEmailClass("name@org.com"));
+            //Console.WriteLine(validEmailUsingEmailClass("name@org.edu"));
+            //Console.WriteLine(validEmailUsingEmailClass("name@org.mil"));
+            //Console.WriteLine(validEmailUsingEmailClass("name@org.gov"));
             Console.WriteLine();
 
             Console.WriteLine("Letter Position Test");
             Console.WriteLine(LetterPosition("coding is fun!"));
             Console.WriteLine();
 
+            Console.WriteLine("Duplicates Test");
+            Console.WriteLine(Duplicates("abcdaefghghfdkdkfkfickdk"));
+            Console.WriteLine();
+
+            Console.WriteLine("Reverse String Recursion Test");
+            Console.WriteLine(ReverseStringRecursion("alphabet"));
+            Console.WriteLine();
+
+            Console.WriteLine("Vowel Count Test");
+            Console.WriteLine(PrintArray(CountVowels("xylophone birthday party")));
+            Console.WriteLine();
+
+            string stuff = "this is a sentence";
+            Console.WriteLine(stuff.Remove(0,1));
+
+            List<string> list = StringPermutations("abc");
+            foreach (string value in list)
+            {
+                Console.Write(value + " ");
+            }
+
             Console.ReadLine();
         }
-        public static int[] IndexSums(int[] array,  int sum)
+        public static int[] IndexSums(int[] array, int sum)
         {
             int index1 = -1;
             int index2 = -1;
@@ -157,9 +179,9 @@ namespace WhiteboardProblems
         {
             Array.Sort(input);
             int increment = input[1] - input[0];
-            for(int i = 1; i < input.Length; i++)
+            for (int i = 1; i < input.Length; i++)
             {
-                if (!(input[i - 1]  == input[i] - increment))
+                if (!(input[i - 1] == input[i] - increment))
                 {
                     return false;
                 }
@@ -283,6 +305,81 @@ namespace WhiteboardProblems
             }
             return output;
         }
+
+        public static string Duplicates(string input)
+        {
+            string firstInstance = "";
+            string duplicates = "";
+            foreach (char value in input)
+            {
+                if (firstInstance.Contains(value))
+                {
+                    if (!(duplicates.Contains(value)))
+                    {
+                        duplicates += value;
+                    }
+                }
+                else
+                {
+                    firstInstance += value;
+                }
+            }
+            return duplicates;
+        }
+
+        public static string ReverseStringRecursion(string input)
+        {
+            string reverse = "";
+            if (input.Length > 0)
+            {
+                reverse += input[input.Length - 1];
+                input = input.Remove(input.Length - 1);
+                reverse += ReverseStringRecursion(input);
+            }
+            return reverse;
+
+        }
+
+        public static int[] CountVowels(string input)
+        {
+            input = input.ToLower();
+            input = input.Replace(" ", "");
+            char[] vowels = new char[] { 'a', 'e', 'i', 'o', 'u' };
+            int vowelCount = 0;
+            int consonantCount = 0;
+            foreach (char value in input)
+            {
+                if (vowels.Contains(value))
+                {
+                    vowelCount++;
+                }
+                else
+                {
+                    consonantCount++;
+                }
+            }
+            return new int[] { vowelCount, consonantCount };
+        }
+
+        public static List<string> StringPermutations(string input)
+        {
+            List<string> permutations = new List<string>();
+            //need input length number of for loops?
+            //use insert for each char/substring?
+            for (int i = 0; i < input.Length; i++)
+            {
+                char value = input[i];
+                input = input.Remove(i,1);
+                for (int j = 0; j < input.Length; j++)
+                {
+                    permutations.Add(input.Insert(j,value.ToString()));
+                }
+            }
+            return permutations;
+        }
+
+
+
 
         public static string PrintArray(int[] array)
         {
